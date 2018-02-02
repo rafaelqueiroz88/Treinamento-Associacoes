@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129192705) do
+ActiveRecord::Schema.define(version: 20180202115517) do
+
+  create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "street"
+    t.string "zip"
+    t.bigint "father_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["father_id"], name: "index_addresses_on_father_id"
+  end
 
   create_table "children", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -41,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180129192705) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "fathers"
   add_foreign_key "children", "fathers"
   add_foreign_key "fathers", "occupations"
 end

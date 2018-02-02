@@ -21,6 +21,7 @@ class FathersController < ApplicationController
   # GET /fathers/new
   def new
     @father = Father.new
+    @father.build_address
   end
 
   # GET /fathers/1/edit
@@ -75,7 +76,7 @@ class FathersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def father_params
-      params.require(:father).permit(:name, :cpf, :email, :occupation_id, :image)
+      params.require(:father).permit(:name, :cpf, :email, :occupation_id, :address_attributes => [:street, :zip])
     end
 
     def set_occupation

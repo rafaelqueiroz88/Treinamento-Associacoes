@@ -1,6 +1,8 @@
 class Father < ApplicationRecord
     has_many :children
     belongs_to :occupation
+    has_one :address
+    accepts_nested_attributes_for :address
 
     scope :search, ->query {where("name like ?", "%#{query}%")}
 
